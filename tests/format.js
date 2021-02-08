@@ -52,3 +52,37 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 3), expected3);
 	});
 });
+
+QUnit.test('Много чисел много колонок', function (assert) {
+	const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000, 10000000, -10000000];
+
+	const expected1 =
+		'        0\n' +
+		'        1\n' + 
+		'        2\n' +
+		'       10\n' + 
+		'      100\n' +
+		'     -100\n' +
+		'     1000\n' +
+		'    10000\n' +
+		'   -10000\n' +
+		' 10000000\n' +
+		'-10000000'
+
+
+	const expected2 =
+		'        0        1\n' +
+		'        2       10\n' +
+		'      100     -100\n' +
+		'     1000    10000\n' +
+		'   -10000 10000000\n' +
+		'-10000000';
+
+	const expected11 =
+		'0 1 2 10 100 -100 1000 10000 -10000 10000000 -10000000'
+
+
+	assert.strictEqual(format(input, 1), expected1);
+	assert.strictEqual(format(input, 2), expected2);
+	assert.strictEqual(format(input, 11), expected11);
+});
