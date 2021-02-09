@@ -53,7 +53,7 @@ QUnit.module('Тестируем функцию format', function () {
 	});
 });
 
-QUnit.test('Много чисел много колонок', function (assert) {
+QUnit.test('format работает правильно при выводе в одну колонку', function (assert) {
 	const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000, 10000000, -10000000];
 
 	const expected1 =
@@ -69,6 +69,12 @@ QUnit.test('Много чисел много колонок', function (assert) 
 		' 10000000\n' +
 		'-10000000'
 
+	assert.strictEqual(format(input, 1), expected1);
+
+});
+
+QUnit.test('format работает правильно при выводе чисел в две колонки', function (assert) {
+	const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000, 10000000, -10000000];
 
 	const expected2 =
 		'        0        1\n' +
@@ -78,11 +84,14 @@ QUnit.test('Много чисел много колонок', function (assert) 
 		'   -10000 10000000\n' +
 		'-10000000';
 
+	assert.strictEqual(format(input, 2), expected2);
+});
+
+QUnit.test('format работает правильно при большом числе колонок = равном числу чисел', function (assert) {
+	const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000, 10000000, -10000000];
+
 	const expected11 =
 		'0 1 2 10 100 -100 1000 10000 -10000 10000000 -10000000'
 
-
-	assert.strictEqual(format(input, 1), expected1);
-	assert.strictEqual(format(input, 2), expected2);
 	assert.strictEqual(format(input, 11), expected11);
 });
