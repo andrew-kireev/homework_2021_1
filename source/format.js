@@ -30,7 +30,13 @@ const format = (array, columns) => {
     if (columns < 0) {
         return null;
     }
-    const rows = Array(Math.ceil(array.length / columns)).fill(0).map((item, index) => array.map(item => String(item)).slice(index * columns, (index + 1) * columns))
+ 
+    array = array.map(item => String(item))
+    let rows = new Array(Math.ceil(array.length / columns))
+    for (let index = 0; index < rows.length; index++) {
+        rows[index] = array.slice(index * columns, (index + 1) * columns)
+    }
+
     const cols = Array(columns).fill(0).map((_, index) => array.map(item => String(item)).filter((n, i) => i % columns === index))
     const widths = cols.map((item, index) => Math.max(...item.map(i => i.length)))
     
