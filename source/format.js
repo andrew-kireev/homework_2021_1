@@ -54,7 +54,3 @@ const format = (array, columns) => {
     });
     return finalResult
 }
-
-
-const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
-console.log(format(input, 2))
