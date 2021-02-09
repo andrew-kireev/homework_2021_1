@@ -27,27 +27,30 @@ const findEndLine = (rows, columns) => {
   * @returns {String}
   */
 const format = (array, columns) => {
-    if (columns < 0)
+    if (columns < 0) {
         return null;
+    }
     const rows = Array(Math.ceil(array.length / columns)).fill(0).map((item, index) => array.map(item => String(item)).slice(index * columns, (index + 1) * columns));
     const cols = Array(columns).fill(0).map((_, index) => array.map(item => String(item)).filter((n, i) => i % columns === index))
     const widths = cols.map((item, index) => Math.max(...item.map(i => i.length)))
     
-    let endLine = findEndLine(rows, columns)
+    const endLine = findEndLine(rows, columns)
     let finalResult = ''
-    console.log(endLine)
 
     rows.forEach(function (item, index){
         item.forEach(function (item2, index2) {
             let repeat = endLine[index2].length - item2.length
-            if (columns != 1 && index2 % columns != 0)
+            if (columns !== 1 && index2 % columns !== 0) {
                 repeat++
-            if (repeat > 0)
+            }
+            if (repeat > 0) {
                 finalResult += ' '.repeat(repeat)
+            }
             finalResult += item2
         });
-        if (index != rows.length - 1)
+        if (index !== rows.length - 1) {
             finalResult += '\n'
+        }
     });
     return finalResult
 }
