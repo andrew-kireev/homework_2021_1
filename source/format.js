@@ -27,7 +27,7 @@ const findEndLine = (rows, columns) => {
   * @returns {String}
   */
 const format = (array, columns) => {
-    if (columns < 0) {
+    if (columns < 0 || array.length == 0 || typeof(array[0]) !== 'number') {
         return null;
     }
  
@@ -36,9 +36,7 @@ const format = (array, columns) => {
     for (let index = 0; index < rows.length; index++) {
         rows[index] = array.slice(index * columns, (index + 1) * columns)
     }
-
     const cols = Array(columns).fill(0).map((_, index) => array.map(item => String(item)).filter((n, i) => i % columns === index))
-    const widths = cols.map((item, index) => Math.max(...item.map(i => i.length)))
     
     const endLine = findEndLine(rows, columns)
     let finalResult = ''

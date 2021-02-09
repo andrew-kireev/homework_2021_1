@@ -95,3 +95,11 @@ QUnit.test('format работает правильно при большом ч�
 
 	assert.strictEqual(format(input, 11), expected11);
 });
+
+
+QUnit.test('format работает правильно с невалидными данными', function (assert) {
+	const input = [ 'ura'];
+
+
+	assert.strictEqual(format(input, 1), null);
+});
