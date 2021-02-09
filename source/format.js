@@ -35,9 +35,7 @@ const format = (array, columns) => {
     let rows = new Array(Math.ceil(array.length / columns))
     for (let index = 0; index < rows.length; index++) {
         rows[index] = array.slice(index * columns, (index + 1) * columns)
-    }
-    const cols = Array(columns).fill(0).map((_, index) => array.map(item => String(item)).filter((n, i) => i % columns === index))
-    
+    }   
     const endLine = findEndLine(rows, columns)
     let finalResult = ''
 
