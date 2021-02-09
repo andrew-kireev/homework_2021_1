@@ -30,27 +30,31 @@ const format = (array, columns) => {
     if (columns < 0) {
         return null;
     }
-    const rows = Array(Math.ceil(array.length / columns)).fill(0).map((item, index) => array.map(item => String(item)).slice(index * columns, (index + 1) * columns));
+    const rows = Array(Math.ceil(array.length / columns)).fill(0).map((item, index) => array.map(item => String(item)).slice(index * columns, (index + 1) * columns))
     const cols = Array(columns).fill(0).map((_, index) => array.map(item => String(item)).filter((n, i) => i % columns === index))
     const widths = cols.map((item, index) => Math.max(...item.map(i => i.length)))
     
     const endLine = findEndLine(rows, columns)
     let finalResult = ''
 
-    rows.forEach(function (item, index){
-        item.forEach(function (item2, index2) {
-            let repeat = endLine[index2].length - item2.length
-            if (columns !== 1 && index2 % columns !== 0) {
+    rows.forEach((row, rowIndex) => {
+        row.forEach((number, numberIndex) => {
+            let repeat = endLine[numberIndex].length - number.length
+            if (columns !== 1 && numberIndex % columns !== 0) {
                 repeat++
             }
             if (repeat > 0) {
                 finalResult += ' '.repeat(repeat)
             }
-            finalResult += item2
+            finalResult += number
         });
-        if (index !== rows.length - 1) {
+        if (rowIndex !== rows.length - 1) {
             finalResult += '\n'
         }
     });
     return finalResult
 }
+
+
+const input = [ 0, 1, 2, 10, 100, -100, 1000, 10000, -10000 ];
+console.log(format(input, 2))
